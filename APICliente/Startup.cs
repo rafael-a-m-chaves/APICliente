@@ -1,4 +1,8 @@
+using APICliente.Application.IServices;
+using APICliente.Application.Services;
 using APICliente.Infra.Contexts;
+using APICliente.Infra.IRepositories;
+using APICliente.Infra.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +33,17 @@ namespace APICliente
             var connection = Configuration["ConnectionStrings:DefaultConection"];
             //Adiciona o Context e determina o tipo de banco de dados e passa a string de conexão
             services.AddDbContext<Context>(options => options.UseSqlServer(connection));
+
+            //Mapeamento dos services e Repositores
+            #region Services
+            services.AddTransient<IVendasClienteService, VendasClienteService>();
+            services.AddTransient<IUsuarioServices, UsuarioService>();
+            #endregion
+
+            #region Repository
+            services.AddTransient<IVendasClienteRepository, VendasClienteRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            #endregion
 
             services.AddControllersWithViews();
         }
