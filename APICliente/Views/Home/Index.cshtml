@@ -1,8 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model UsuarioRequest
+@{
+    ViewData["Title"] = "Acesso Sistema";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h3 class="display-4">Bem Vindo</h3>
+    <p class="p-2">Selecione abaixo com qual usuário deseja entrar no sistema.</p>
+
+    <form asp-action="AcessarSistema">
+        
+        <div class="form-group">
+            <label asp-for="Nome" class="form-label">Selecione um usuário</label>
+            <br />
+            <select asp-for="Nome" class="form-control-sm">
+                <option selected>Clique para selecionar</option>
+                @foreach (var item in Model.Usuarios)
+                {
+                    <option value="@item.Tipo +' '+ @item.Nome">
+                        @Html.DisplayFor(modelItem => item.Tipo) @Html.DisplayFor(modelItem => item.Nome)
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Acessar Sistema" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,4 +1,7 @@
-﻿using APICliente.Models;
+﻿using APICliente.Application.IServices;
+using APICliente.Domain.DTOs.Request;
+using APICliente.Domain.Entities;
+using APICliente.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +15,19 @@ namespace APICliente.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUsuarioServices usuarioServices;
+        public HomeController(ILogger<HomeController> logger, IUsuarioServices _usuarioServices)
         {
             _logger = logger;
+            usuarioServices = _usuarioServices;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Usuario> usuarios = usuarioServices.Get(r => r.IsActive != false).ToList();
+            UsuarioRequest usuarioRequest = new UsuarioRequest();
+            usuarioRequest.Usuarios = usuarios;
+            return View(usuarioRequest);
         }
 
         public IActionResult Privacy()
