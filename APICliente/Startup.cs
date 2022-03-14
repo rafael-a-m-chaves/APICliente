@@ -1,6 +1,8 @@
+using APICliente.Infra.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,11 @@ namespace APICliente
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Obtem a string de conexão com o banco de dados
+            var connection = Configuration["ConnectionStrings:DefaultConection"];
+            //Adiciona o Context e determina o tipo de banco de dados e passa a string de conexão
+            services.AddDbContext<Context>(options => options.UseSqlServer(connection));
+
             services.AddControllersWithViews();
         }
 
