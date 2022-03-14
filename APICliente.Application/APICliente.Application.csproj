@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ISevices\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\APICliente.Domain\APICliente.Domain.csproj" />
     <ProjectReference Include="..\APICliente.Infra\APICliente.Infra.csproj" />
   </ItemGroup>
