@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using APICliente.Domain.Entities;
 
 
 namespace APICliente.Infra.Contexts
