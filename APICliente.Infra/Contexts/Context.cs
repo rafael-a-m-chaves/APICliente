@@ -18,6 +18,7 @@ namespace APICliente.Infra.Contexts
 
         public DbSet<VendasCliente> VendasCliente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Despesas> Despesas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +30,7 @@ namespace APICliente.Infra.Contexts
 
             modelBuilder.Entity<VendasCliente>(new VendasClienteMap().Configure);
             modelBuilder.Entity<Usuario>(new UsuarioMap().Configure);
+            modelBuilder.Entity<Despesas>(new DespesasMap().Configure);
 
             base.OnModelCreating(modelBuilder);
         }
