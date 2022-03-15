@@ -5,15 +5,10 @@ using APICliente.Infra.IRepositories;
 using APICliente.Infra.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace APICliente
 {
@@ -38,11 +33,13 @@ namespace APICliente
             #region Services
             services.AddTransient<IVendasClienteService, VendasClienteService>();
             services.AddTransient<IUsuarioServices, UsuarioService>();
+            services.AddTransient<IDespesasSevice, DespesasService>();
             #endregion
 
             #region Repository
             services.AddTransient<IVendasClienteRepository, VendasClienteRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IDespesasRepository, DespesasRepository>();
             #endregion
 
             services.AddControllersWithViews();
