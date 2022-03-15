@@ -66,7 +66,33 @@ namespace APICliente.Controllers
                 }
                 else if (usuario.Tipo == "Financeiro")
                 {
-                    return View("FinanceiroDashboard");
+
+                    //busca todas as informações nescessarias para compor a view
+
+                    FinanceiroDashboardRequest financeiro = new FinanceiroDashboardRequest();
+                    var vendasClientes = vendasClienteService.Get().ToList();
+                    var despesas = despesasService.Get().ToList();
+                    financeiro.Clientes = requestServices.ListaClientesAPICurso("Financeiro");
+
+                    foreach (var item in vendasClientes)
+                    {
+                        financeiro.Receita += item.ValorDaVenda;
+                    }
+
+                    foreach (var item in despesas)
+                    {
+                        financeiro.Despesa += item.Valor;
+                    }
+
+                    foreach (var item in financeiro.Clientes)
+                    {
+                        if (vendasClientes.Exists(r => r.CodigoCliente == item.Codigo))
+                        {
+                            financeiro.ClientesJaCompraram++;
+                        }
+                    }
+
+                    return View("FinanceiroDashboard", financeiro);
                 }
                 else if (usuario.Tipo == "Vendedor")
                 {

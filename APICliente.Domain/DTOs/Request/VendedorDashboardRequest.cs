@@ -1,0 +1,18 @@
+﻿using APICliente.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace APICliente.Domain.DTOs.Request
+{
+    public class VendedorDashboardRequest
+    {
+        public List<VendasCliente> VendasClientes { get; set; }
+        public List<Clientes> Clientes { get; set; }
+        public List<Despesas> Despesas { get; set; }
+        public decimal Saldo { get; set; }
+        public int ClientesJaCompraram { get; set; }
+    }
+}
