@@ -10,18 +10,18 @@
     <form asp-action="AcessarSistema">
         
         <div class="form-group">
-            <label asp-for="Nome" class="form-label">Selecione um usuário</label>
+            <label asp-for="IdUsuario" class="form-label">Selecione um usuário</label>
             <br />
-            <select asp-for="Nome" class="form-control-sm">
-                <option selected>Clique para selecionar</option>
+            <select asp-for="IdUsuario" class="form-control-sm">
+                
                 @foreach (var item in Model.Usuarios)
                 {
-                    <option value="@item.Tipo +' '+ @item.Nome">
+                    <option value="@item.Id">
                         @Html.DisplayFor(modelItem => item.Tipo) @Html.DisplayFor(modelItem => item.Nome)
                     </option>
                 }
             </select>
-            <span asp-validation-for="Nome" class="text-danger"></span>
+            <span asp-validation-for="IdUsuario" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Acessar Sistema" class="btn btn-primary" />

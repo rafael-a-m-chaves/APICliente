@@ -2,6 +2,7 @@
 using APICliente.Domain.DTOs.Request;
 using APICliente.Domain.Entities;
 using APICliente.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -28,6 +29,25 @@ namespace APICliente.Controllers
             UsuarioRequest usuarioRequest = new UsuarioRequest();
             usuarioRequest.Usuarios = usuarios;
             return View(usuarioRequest);
+        }
+
+        [HttpPost]
+        [Route("AcessarSistema")]
+        public IActionResult AcessarSistema(IFormCollection collection)
+        {
+            try
+            {
+                Usuario usuario = usuarioServices.FindById(Convert.ToInt32(collection["IdUsuario"]));
+                return View(usuario);
+            }
+            catch
+            {
+                List<Usuario> usuarios = usuarioServices.Get(r => r.IsActive != false).ToList();
+                UsuarioRequest usuarioRequest = new UsuarioRequest();
+                usuarioRequest.Usuarios = usuarios;
+                return View(usuarioRequest);
+            }
+            
         }
 
         public IActionResult Privacy()

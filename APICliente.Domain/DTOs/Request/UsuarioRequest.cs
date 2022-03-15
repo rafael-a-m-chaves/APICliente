@@ -5,7 +5,7 @@ namespace APICliente.Domain.DTOs.Request
 {
     public class UsuarioRequest
     {
-        public string Nome { get; set; }
+        public int IdUsuario { get; set; }
         public List<Usuario> Usuarios {get; set;}
     }
 }
