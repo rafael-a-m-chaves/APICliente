@@ -9,10 +9,9 @@ namespace APICliente.Domain.DTOs.Request
 {
     public class VendedorDashboardRequest
     {
-        public List<VendasCliente> VendasClientes { get; set; }
-        public List<Clientes> Clientes { get; set; }
-        public List<Despesas> Despesas { get; set; }
-        public decimal Saldo { get; set; }
-        public int ClientesJaCompraram { get; set; }
+        public int TotalDeClientes  { get; set; }
+        public int TotalDeVendas { get; set; }
+        public decimal ValorVendido { get; set; }
+        public decimal ComissaoGerada { get; set; }
     }
 }

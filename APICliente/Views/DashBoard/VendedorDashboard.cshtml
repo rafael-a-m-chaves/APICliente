@@ -1,4 +1,4 @@
-﻿@model AdministradorDashboardRequest
+﻿@model VendedorDashboardRequest
 
 <div class="content-wrapper container-xxl pt-1">
     <div class="content-body">
@@ -9,7 +9,7 @@
                         <h5>Seja bem vindo🎉!</h5>
                         <h3 class="mb-75 mt-2 pt-50">
                             <a href="javascript:void(0);">
-                                @Model.Clientes.Count()
+                                @Model.TotalDeClientes
                             </a>
                             <p class="card-text small">Clientes cadastrados</p>
                         </h3>
@@ -33,8 +33,8 @@
                                         </div>
                                     </div>
                                     <div class="media-body my-auto">
-                                        <h4 class="font-weight-bolder mb-0">@Model.VendasClientes.Count()</h4>
-                                        <p class="card-text font-small-3 mb-0">Vendas</p>
+                                        <h4 class="font-weight-bolder mb-0">@Model.TotalDeVendas</h4>
+                                        <p class="card-text font-small-3 mb-0">Total de vendas</p>
                                     </div>
                                 </div>
                             </div>
@@ -42,13 +42,13 @@
                                 <div class="media">
                                     <div class="avatar bg-light-info mr-2">
                                         <div class="avatar-content">
-                                            <i class="fas fa-user"></i>
+                                            <i class="fas fa-dollar-sign"></i>
                                         </div>
                                     </div>
                                     <div class="media-body my-auto">
-                                        <h4 class="font-weight-bolder mb-0">@Model.ClientesJaCompraram</h4>
+                                        <h4 class="font-weight-bolder mb-0">R$@Model.ValorVendido</h4>
                                         <!-- <h4 class="font-weight-bolder mb-0">674</h4> -->
-                                        <p class="card-text font-small-3 mb-0">Já Compraram</p>
+                                        <p class="card-text font-small-3 mb-0">Valor total vendido</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,8 @@
                                     </div>
                                     <div class="media-body my-auto">
                                         
-                                        <h4 class="font-weight-bolder mb-0">R$@Model.Saldo</h4>
-                                        <p class="card-text font-small-3 mb-0">Saldo</p>
+                                        <h4 class="font-weight-bolder mb-0">R$@Model.ComissaoGerada</h4>
+                                        <p class="card-text font-small-3 mb-0">Comissão gerada</p>
                                     </div>
                                 </div>
                             </div>

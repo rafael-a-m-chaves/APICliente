@@ -96,7 +96,26 @@ namespace APICliente.Controllers
                 }
                 else if (usuario.Tipo == "Vendedor")
                 {
-                    return View("VendedorDashboard");
+
+                    //busca todas as informações nescessarias para compor a view
+
+                    VendedorDashboardRequest vendedor = new VendedorDashboardRequest();
+                    var despesas = despesasService.Get().ToList();
+                    vendedor.TotalDeClientes = requestServices.ListaClientesAPICurso("Financeiro").Count();
+
+                    // buscas todas as vendas realizadas pelo vendedor
+                    var totalvendas = vendasClienteService.Get(r => r.IdUsuario == usuario.Id).ToList(); 
+                    vendedor.TotalDeVendas = totalvendas.Count();
+
+                    foreach (var item in totalvendas)
+                    {
+                        vendedor.ValorVendido += item.ValorDaVenda;
+                    }
+
+                    //valor da comissão fixada em 5%
+                    vendedor.ComissaoGerada = Math.Round(vendedor.ValorVendido * 0.05M, 2);
+
+                    return View("VendedorDashboard", vendedor);
                 }
                 else
                 {
