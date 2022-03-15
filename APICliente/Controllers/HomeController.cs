@@ -2,6 +2,7 @@
 using APICliente.Domain.DTOs.Request;
 using APICliente.Domain.Entities;
 using APICliente.Models;
+using Hanssens.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -38,7 +39,14 @@ namespace APICliente.Controllers
             try
             {
                 Usuario usuario = usuarioServices.FindById(Convert.ToInt32(collection["IdUsuario"]));
-                return View(usuario);
+                using (var storage = new LocalStorage())
+                {
+                    // store any object
+                    storage.Store("usuario", usuario);
+
+                    storage.Persist();
+                }
+                return Redirect("DashBoard");
             }
             catch
             {
