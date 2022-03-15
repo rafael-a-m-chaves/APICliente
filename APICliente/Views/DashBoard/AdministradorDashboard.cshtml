@@ -1,0 +1,75 @@
+﻿@model AdministradorDashboardRequest
+
+<div class="content-wrapper container-xxl pt-1">
+    <div class="content-body">
+        <div class="row match-height">
+            <div class="col-xl-4 col-md-6 col-12">
+                <div class="card card-congratulation-medal">
+                    <div class="card-body">
+                        <h5>Seja bem vindo🎉!</h5>
+                        <h3 class="mb-75 mt-2 pt-50">
+                            <a href="javascript:void(0);">
+                                @Model.Clientes.Count()
+                            </a>
+                            <p class="card-text small">Clientes cadastrados</p>
+                        </h3>
+                        <img src="~/lib/badge.svg" style="position: absolute; top: 0; right: 8%;" alt="Medal Pic" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-md-6 col-12">
+                <div class="card card-statistics">
+                    <div class="card-header">
+                        <h5 class="card-title">Estatísticas</h5>
+                    </div>
+                    <div class="card-body statistics-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                                <div class="media">
+                                    <div class="avatar bg-light-primary mr-2">
+                                        <div class="avatar-content">
+                                            <i class="fas fa-chart-line" style="font-size: 15px;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body my-auto">
+                                        <h4 class="font-weight-bolder mb-0">@Model.VendasClientes.Count()</h4>
+                                        <p class="card-text font-small-3 mb-0">Vendas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3 mb-2 mb-xl-0">
+                                <div class="media">
+                                    <div class="avatar bg-light-info mr-2">
+                                        <div class="avatar-content">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body my-auto">
+                                        <h4 class="font-weight-bolder mb-0">@Model.ClientesJaCompraram</h4>
+                                        <!-- <h4 class="font-weight-bolder mb-0">674</h4> -->
+                                        <p class="card-text font-small-3 mb-0">Já Compraram</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xl-3 mb-2 mb-sm-0">
+                                <div class="media">
+                                    <div class="avatar bg-light-danger mr-2">
+                                        <div class="avatar-content">
+                                            <i class="fas fa-wallet" style="font-size: 15px;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body my-auto">
+                                        
+                                        <h4 class="font-weight-bolder mb-0">R$@Model.Saldo</h4>
+                                        <p class="card-text font-small-3 mb-0">Saldo</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

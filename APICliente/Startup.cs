@@ -34,6 +34,7 @@ namespace APICliente
             services.AddTransient<IVendasClienteService, VendasClienteService>();
             services.AddTransient<IUsuarioServices, UsuarioService>();
             services.AddTransient<IDespesasSevice, DespesasService>();
+            services.AddTransient<IRequestServices, RequestServices>();
             #endregion
 
             #region Repository

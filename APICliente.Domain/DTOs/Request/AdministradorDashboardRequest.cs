@@ -12,5 +12,7 @@ namespace APICliente.Domain.DTOs.Request
         public List<VendasCliente> VendasClientes { get; set; }
         public List<Clientes> Clientes { get; set; }
         public List<Despesas> Despesas { get; set; }
+        public decimal Saldo { get; set; }
+        public int ClientesJaCompraram { get; set; }
     }
 }
