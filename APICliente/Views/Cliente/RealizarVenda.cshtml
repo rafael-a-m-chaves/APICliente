@@ -17,7 +17,8 @@
                 <input type="hidden" asp-for="Codigo" value="@Model.Codigo" />
                 <input type="hidden" asp-for="Subtrair" value="@true" />
                 <label asp-for="Valor" class="form-label">Valor da Venda</label>
-                <input type="text" asp-for="Valor" class="form-control" />
+                <input type="number" asp-for="Valor" maxlength="18" step=".01" class="form-control"/>
+
                 <input type="submit" class="btn btn-primary" value="Vender" />
 
             </form>

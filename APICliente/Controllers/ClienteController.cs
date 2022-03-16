@@ -95,18 +95,22 @@ namespace APICliente.Controllers
             alteraValor.Usuario = usuario.Tipo + " " + usuario.Nome;
             alteraValor.Codigo = Convert.ToInt32(collection["Codigo"]);
             var subtrair = collection["Subtrair"];
-            if(subtrair.Count == 2)
+
+            //Foi implementado dessa maneira pois estava dando erro de vim dois bits de uma vez
+            if (subtrair.Count == 2)
             {
-                //Foi implementado dessa maneira pois estava dando erro de vim dois bits de uma vez
                 alteraValor.Subtrair = true;
             }
             else
             {
                 alteraValor.Subtrair = false;
             }
-            
-            alteraValor.Valor = Convert.ToDecimal(collection["Valor"]);
-            
+
+            //Transforma decimal pt-br em decimal em en
+            string valor = collection["Valor"];
+            valor = valor.Replace(".", ",").Replace(",", ",");
+            alteraValor.Valor = Convert.ToDecimal(valor);
+
             var valorAtual = services.ObterLimiteClienteApiCurso(alteraValor.Codigo);
             
             

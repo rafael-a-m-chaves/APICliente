@@ -17,7 +17,7 @@
                 <input type="hidden" asp-for="Codigo" value="@Model.Codigo" />
 
                 <label asp-for="Valor" class="form-label">Valor da Venda</label>
-                <input type="text" asp-for="Valor" class="form-control" />
+                <input type="number" asp-for="Valor" maxlength="18" step=".01" class="form-control" />
                 <label class="form-label asp-for="Subtrair">Marque se for para diminuir o limite</label>
                 <div class="form-group form-check">
                     <label class="form-check-label">
