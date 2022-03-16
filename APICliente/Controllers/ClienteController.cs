@@ -73,7 +73,7 @@ namespace APICliente.Controllers
         public IActionResult AjustarLimite(int codigo)
         {
             ObterLimite obterLimite = services.ObterLimiteClienteApiCurso(codigo);
-            return View("AjustarLimite", obterLimite);
+            return View(" -m ", obterLimite);
         }
 
         public IActionResult AlterarLimite(IFormCollection collection)
