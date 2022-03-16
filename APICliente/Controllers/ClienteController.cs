@@ -15,9 +15,11 @@ namespace APICliente.Controllers
     public class ClienteController : Controller
     {
         IRequestServices services;
-        public ClienteController(IRequestServices _services)
+        IVendasClienteService vendasClienteService;
+        public ClienteController(IRequestServices _services, IVendasClienteService _vendasClienteService)
         {
             services = _services;
+            vendasClienteService = _vendasClienteService;
         }
         public IActionResult Index()
         {
@@ -110,18 +112,36 @@ namespace APICliente.Controllers
             string valor = collection["Valor"];
             valor = valor.Replace(".", ",").Replace(",", ",");
             alteraValor.Valor = Convert.ToDecimal(valor);
+            
+            //verifica se é vendedor(Como regra aplica aqui somente vendedor realiza vendas)
+            if(usuario.Tipo == "Vendedor")
+            {
 
+            }
+
+
+            //Checa com APIcurso o limite
             var valorAtual = services.ObterLimiteClienteApiCurso(alteraValor.Codigo);
             
-            
+            //Verifica se o valor informa esta dentro da regra de negocio
             if (valorAtual.LimiteCredito < alteraValor.Valor && alteraValor.Subtrair)
             {
+                //se não estiver retorna uma tela com a mensagem de erro
                 valorAtual.ErrorMensagem = "O Valor informado ultrapassa o limite do Cliente";
                 return View("RealizarVenda", valorAtual);
             }
             else
             {
+                //caso esteja manda para APICurso o objeto nescesario para realizar as modificaçoes no bd
                 services.AlterarLimiteClienteApiCurso(alteraValor);
+                
+
+                //Verifica se é vendedor para inserir como venda no banco
+                if (usuario.Tipo == "Vendedor")
+                {
+                    vendasClienteService.SalvaNovaVenda(alteraValor,usuario.Id);
+                }
+
                 return Index();
             }
         }

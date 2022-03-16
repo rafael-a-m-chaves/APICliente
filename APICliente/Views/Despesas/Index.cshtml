@@ -1,0 +1,41 @@
+﻿@model IEnumerable<APICliente.Domain.Entities.Despesas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Motivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataDespesa)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Motivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataDespesa)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

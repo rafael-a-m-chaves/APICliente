@@ -10,6 +10,7 @@ namespace APICliente.Infra.Mapping
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Valor);
             builder.Property(r => r.Motivo);
+            builder.Property(r => r.DataDespesa);
         }
     }
 }

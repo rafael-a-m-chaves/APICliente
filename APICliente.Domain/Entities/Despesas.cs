@@ -11,5 +11,6 @@ namespace APICliente.Domain.Entities
         public int Id { get; set; }
         public decimal Valor { get; set; }
         public string Motivo { get; set; }
+        public DateTime DataDespesa { get; set; }
     }
 }
