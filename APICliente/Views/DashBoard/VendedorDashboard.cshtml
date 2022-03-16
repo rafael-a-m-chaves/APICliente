@@ -1,5 +1,9 @@
 ﻿@model VendedorDashboardRequest
 
+@{
+    ViewData["Title"] = "DashBoard";
+}
+
 <div class="content-wrapper container-xxl pt-1">
     <div class="content-body">
         <div class="row match-height">
@@ -8,7 +12,7 @@
                     <div class="card-body">
                         <h5>Seja bem vindo🎉!</h5>
                         <h3 class="mb-75 mt-2 pt-50">
-                            <a href="javascript:void(0);">
+                            <a asp-controller="Cliente" asp-action="Index">
                                 @Model.TotalDeClientes
                             </a>
                             <p class="card-text small">Clientes cadastrados</p>
@@ -60,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="media-body my-auto">
-                                        
+
                                         <h4 class="font-weight-bolder mb-0">R$@Model.ComissaoGerada</h4>
                                         <p class="card-text font-small-3 mb-0">Comissão gerada</p>
                                     </div>
