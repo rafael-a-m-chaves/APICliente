@@ -1,5 +1,6 @@
 ﻿using APICliente.Application.IServices;
 using APICliente.Domain.DTOs.Request;
+using APICliente.Domain.DTOs.Response;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,32 @@ namespace APICliente.Application.Services
     public class RequestServices : IRequestServices
     {
         private readonly string url = @"https://localhost:44304/api/";
+
+        public void AlterarLimiteClienteApiCurso(AlteraValorResponse alteraValor)
+        {
+            try
+            {
+                string urlPreLogin = url + "LimiteCliente/AlterarLimiteCliente";
+                
+                var objetoJson = JsonConvert.SerializeObject(alteraValor);
+                Byte[] byteArray = Encoding.UTF8.GetBytes(objetoJson);
+                WebRequest tRequest = WebRequest.Create(urlPreLogin);
+                tRequest.Method = "POST";
+                tRequest.Timeout = 30000;
+                tRequest.Headers.Add("accept: application/json");
+                tRequest.ContentType = "application/json";
+                tRequest.ContentLength = byteArray.Length;
+                Stream dataStream = tRequest.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+
+                WebResponse reposta = tRequest.GetResponse();
+            }
+            catch (Exception ex)
+            {
+                //return new Clientes { erro = ex.Message}
+            }
+        }
 
         public void AlterarStatusApiCurso(string tipoEUsuario, int codigo)
         {

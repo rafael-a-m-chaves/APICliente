@@ -89,13 +89,23 @@ namespace APICliente.Controllers
 
             AlteraValorResponse alteraValor = new AlteraValorResponse();
 
-            if ()
+            alteraValor.Usuario = usuario.Tipo + " " + usuario.Nome;
+            alteraValor.Codigo = Convert.ToInt32(collection["Codigo"]);
+            alteraValor.Subtrair = Convert.ToBoolean(collection["Subtrair"]);
+            alteraValor.Valor = Convert.ToDecimal(collection["Valor"]);
+            
+            var valorAtual = services.ObterLimiteClienteApiCurso(alteraValor.Codigo);
+            
+            
+            if (valorAtual.LimiteCredito < alteraValor.Valor && alteraValor.Subtrair)
             {
-
+                valorAtual.ErrorMensagem = "O Valor informado ultrapassa o limite do Cliente";
+                return View("RealizarVenda", valorAtual);
             }
             else
             {
-               
+                services.AlterarLimiteClienteApiCurso(alteraValor);
+                return Index();
             }
         }
     }
