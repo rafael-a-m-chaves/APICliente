@@ -73,9 +73,12 @@ namespace APICliente.Controllers
         public IActionResult AjustarLimite(int codigo)
         {
             ObterLimite obterLimite = services.ObterLimiteClienteApiCurso(codigo);
-            return View(" -m ", obterLimite);
+            return View("AjustarLimite", obterLimite);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AlterarLimite(IFormCollection collection)
         {
             Usuario usuario = new Usuario();
@@ -91,7 +94,17 @@ namespace APICliente.Controllers
 
             alteraValor.Usuario = usuario.Tipo + " " + usuario.Nome;
             alteraValor.Codigo = Convert.ToInt32(collection["Codigo"]);
-            alteraValor.Subtrair = Convert.ToBoolean(collection["Subtrair"]);
+            var subtrair = collection["Subtrair"];
+            if(subtrair.Count == 2)
+            {
+                //Foi implementado dessa maneira pois estava dando erro de vim dois bits de uma vez
+                alteraValor.Subtrair = true;
+            }
+            else
+            {
+                alteraValor.Subtrair = false;
+            }
+            
             alteraValor.Valor = Convert.ToDecimal(collection["Valor"]);
             
             var valorAtual = services.ObterLimiteClienteApiCurso(alteraValor.Codigo);

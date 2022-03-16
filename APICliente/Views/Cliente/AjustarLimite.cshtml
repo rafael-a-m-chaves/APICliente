@@ -12,16 +12,19 @@
         </div>
     }
     <div class="row">
-        <div class="form-group">
+        <div >
             <form asp-action="AlterarLimite">
                 <input type="hidden" asp-for="Codigo" value="@Model.Codigo" />
 
-                <label asp-for="Valor" class="form-control">Valor da Venda</label>
-                <input type="number" asp-for="Valor" class="form-control" />
-                <label class="form-control" asp-for="Subtrair">Marque se for para diminuir o limite</label>
-                <input type="checkbox" class="form-check-input" asp-for="Subtrair"/>
-
-                <input type="submit" class="btn btn-primary" value="Vender" />
+                <label asp-for="Valor" class="form-label">Valor da Venda</label>
+                <input type="text" asp-for="Valor" class="form-control" />
+                <label class="form-label asp-for="Subtrair">Marque se for para diminuir o limite</label>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Subtrair" /> @Html.DisplayNameFor(model => model.Subtrair)
+                    </label>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Ajustar Limite" />
 
 
 
