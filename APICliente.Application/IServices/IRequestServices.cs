@@ -6,5 +6,7 @@ namespace APICliente.Application.IServices
     public interface IRequestServices
     {
         public List<Clientes> ListaClientesAPICurso(string tipo);
+        public void AlterarStatusApiCurso(string tipoEUsuario, int codigo);
+        public ObterLimite ObterLimiteClienteApiCurso(int codigo);
     }
 }

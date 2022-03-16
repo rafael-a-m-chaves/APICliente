@@ -13,7 +13,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var item in Model){
+            @foreach (var item in Model)
+            {
                 <tr>
                     <td class="text-center">@item.Codigo</td>
                     <td class="text-center">@item.Nome</td>
@@ -27,11 +28,11 @@
                             <a href="@Url.Action("AlterarStatus", new { codigo = @item.Codigo })" class="btn btn-danger"><span class="fa fa-check"> Ativar</span></a>
                         }
 
-                    <a href="@Url.Action("RealizarVenda", new { codigo = @item.Codigo })" class="btn btn-success"><span class="fas fa-dollar-sign"></span> Realizar venda</a>
-                        
+                        <a href="@Url.Action("AjustarLimite", new { codigo = @item.Codigo })" class="btn btn-secondary"><span class="fas fa-dollar-sign"></span> Ajustar Limite</a>
+
                     </td>
-                    
-                    
+
+
                 </tr>
             }
 

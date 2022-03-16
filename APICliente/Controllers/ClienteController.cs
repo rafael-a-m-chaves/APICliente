@@ -1,4 +1,6 @@
 ﻿using APICliente.Application.IServices;
+using APICliente.Domain.DTOs.Request;
+using APICliente.Domain.DTOs.Response;
 using APICliente.Domain.Entities;
 using Hanssens.Net;
 using Microsoft.AspNetCore.Http;
@@ -26,18 +28,75 @@ namespace APICliente.Controllers
                 usuario = storage.Get<Usuario>("usuario");
                 storage.Persist();
             }
-            var clientes = services.ListaClientesAPICurso(usuario.Tipo);
-            return View("ListarCliente", clientes);
+
+            if (usuario != null)
+            {
+                if (usuario.Tipo == "Vendedor")
+                {
+                    var clientes = services.ListaClientesAPICurso(usuario.Tipo);
+                    return View("ListarCliente", clientes);
+                }
+                else
+                {
+                    var clientes = services.ListaClientesAPICurso(usuario.Tipo);
+                    return View("ListarClienteAdministradorEFinanceiro", clientes);
+                }
+            }
+            else
+            {
+                return Redirect("Home");
+            }
         }
 
         public IActionResult AlterarStatus(int codigo)
         {
-            return View();
+            Usuario usuario = new Usuario();
+
+            using (var storage = new LocalStorage())
+            {
+                usuario = storage.Get<Usuario>("usuario");
+                storage.Persist();
+            }
+            if (usuario == null) return Redirect("Home");
+
+            services.AlterarStatusApiCurso(usuario.Tipo+" "+usuario.Nome, codigo);
+
+            return Index();
         }
 
-        public IActionResult RealizarVenda (int codigo)
+        public IActionResult RealizarVenda(int codigo)
         {
-            return View();
+            ObterLimite obterLimite = services.ObterLimiteClienteApiCurso(codigo);
+            return View("RealizarVenda", obterLimite);
+        }
+
+        public IActionResult AjustarLimite(int codigo)
+        {
+            ObterLimite obterLimite = services.ObterLimiteClienteApiCurso(codigo);
+            return View("AjustarLimite", obterLimite);
+        }
+
+        public IActionResult AlterarLimite(IFormCollection collection)
+        {
+            Usuario usuario = new Usuario();
+
+            using (var storage = new LocalStorage())
+            {
+                usuario = storage.Get<Usuario>("usuario");
+                storage.Persist();
+            }
+            if (usuario == null) return Redirect("Home");
+
+            AlteraValorResponse alteraValor = new AlteraValorResponse();
+
+            if ()
+            {
+
+            }
+            else
+            {
+               
+            }
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿@model ObterLimite
+
+<div class="card card-body">
+    <div class="row">
+        <div class="text-center">
+            <h5>Venda Cliente</h5>
+        </div>
+    </div>
+    @if (Model.ErrorMensagem != null) { 
+        <div class="alert-danger">
+            @Model.ErrorMensagem
+        </div>
+    }
+    <div class="row">
+        <div class="form-group">
+            <form asp-action="AlterarLimite">
+                <input type="hidden" asp-for="Codigo" value="@Model.Codigo" />
+                <input type="hidden" asp-for="Subtrair" value="@false" />
+                <label asp-for="Valor" class="form-control">Valor da Venda</label>
+                <input type="number" asp-for="Valor" class="form-control" />
+                <input type="submit" class="btn btn-primary" value="Vender" />
+
+            </form>
+            <a asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+</div>
